@@ -1,0 +1,75 @@
+Overview:
+In this assignment, you will be building a simplified simulation of a streaming platform. Users have subscriptions to platforms which provide content, such as movies and music. User interactions with content is retained, for instance when the content was last accessed. Configuration settings are also provided at both the user level and the subscription level.
+
+Topics:
+* Use of interfaces (Interfaces)
+* Use of parent and child classes (Inheritance)
+* Abstract classes (Inheritance)
+* Static polymorphism - overloading (Inheritance)
+* Dynamic polymorphism - overriding (Inheritance)
+* Liskov Substitution Principle (OOP Part III)
+* Using composition in object relationships (Class Relationships)
+* Using aggregation in object relationships (Class Relationships)
+* Throwing a custom exception (Exception Handling)
+* Catching an exception (Exception Handling) 
+* Writing code based on unit tests (Testing PartII)
+* Writing code based on a UML diagram (multiple lessons)
+
+Note: This design violates the Dependency Inversion Principle in order to demonstrate a composition relationship between User and Setting, and between Subscription and Setting. These relationships do not demonstrate ideal OOP design.
+
+Note: Because we have not studied data structures yet, this program uses arrays. The way that data is stored in arrays does not represent optimal design. Some code has been provided to indicate how arrays can be used to solve this problem. 
+
+Note: Default values for CATEGORIES are not depicted on the UML diagram due to length. This information can be extrapolated from tests and the provided sample code.
+
+Instructions:
+You have been provided with a UML diagram and some unit tests. Implement the program. Some (partial) code has been provided. Below is a description of the purpose of each class/interface:
+* User - Represents a user of the system
+* Subscription - The relationship between a user and StreamingPlatform, contains information about the type of subscription (e.g., Premium, Standard)
+* StreamingPlatform - A platform offering a service, such as music or video streaming
+* Setting - An interface describing a standard format for a configuration setting
+* LanguageAndAccessibilityConfiguration - A class used for a setting about language and captioning. Each instance of the class represents a specific setting. The class also contains static information about all available settings.
+* AppearanceConfiguration - A class used for a setting about appearance, such as menu in dark mode or light mode. Each instance of the class represents a specific setting. The class also contains static information about all available settings.
+* GeneralConfiguration - A class used for general settings, such as autoplay. Each instance of the class represents a specific setting. The class also contains static information about all available settings.
+* ContentAccessRestrictionException - An exception thrown if the user cannot access content, for instance if it is not available in their region
+* Content - A class describing common information about content
+* Movie - Each instance of the class represents a movie 
+* Music - Each instance of the class represents a song 
+* Interaction - Stores information about a user's interaction with Content, such as when it was last accessed
+
+The program will be assessed through automated testing (described in lesson Testing Part I). Different values will be used for testing than the ones provided in the example tests. 
+
+Warning: You may receive a 0 if your submission does not follow the submission requirements. Your code must compile and run on the command line, be part of the edu.ucalgary.oop package, and be submitted in a zip file exactly as described in the general submission instructions.
+
+Submit only (and all of) the files:
+         * AppearanceConfiguration.java
+         * ContentAccessRestrictionException.java
+         * Content.java
+         * GeneralConfiguration.java
+         * Interaction.java
+         * LanguageAndAccessibilityConfiguration.java
+         * Movie.java
+         * Music.java
+         * Setting.java
+         * StreamingPlatform.java
+         * Subscription.java
+         * User.java
+
+Warning: Do NOT include any Test files as this will cause a compilation problem in automatic testing, resulting in a 0.
+
+In addition to the tests which were provided, which verify the functionality of individual methods, your work will be assessed for adherence to the interface and inheritance relationships depicted in the UML diagram. The total number of points is based on the provided tests plus the tests described below.
+
+You will receive one mark for successfully passing each test:
+(1)  testMusicInheritsFromContent - The Music class inherits from Content
+(2)  testMovieInheritsFromContent - The Movie class inherits from Content
+(3)  testContentImplementsGetTitle - The method getTitle is implemented in Content, not a child class (this test will be conducted on one of the two child classes of Content)
+(4)  testContentImplementsGetDuration - The method getDuration is implemented in Content, not a child class (this test will be conducted on one of the two child classes of Content)
+(5)  testContentImplementsGetGenre - The method getGenre is implemented in Content, not a child class (this test will be conducted on one of the two child classes of Content)
+(6)  testToStringFromChildClass - The method toString is implemented in a child class, not Content (this test will be conducted on one of the two child classes of Content)
+(7)  testAppearanceConfigurationRealizesSetting - The AppearanceConfiguration class realizes the Setting interface
+(8)  testGeneralConfigurationRealizesSetting - The AppearanceConfiguration class realizes the Setting interface
+(9)  testLanguageAndAccessibilityConfigurationRealizesSetting - The AppearanceConfiguration class realizes the Setting interface
+(10) testGetCurrentValueFromInterface - The method getCurrentValue is defined in ther interface but implemented by the realizing class (this test will be conducted on one of the three classes which realizes Setting)
+(11) testGetCurrentCategoryFromInterface - The method getCurrentCategory is defined in ther interface but implemented by the realizing class (this test will be conducted on one of the three classes which realizes Setting)
+(12) testSetValueFromInterface - The method setValue is defined in ther interface but implemented by the realizing class (this test will be conducted on one of the three classes which realizes Setting)
+(13) testGetCategoriesIsStatic - The method getCategories is a static method (this test will be conducted on one of the three classes which realizes Setting)
+(14) testGetOptionsIsStatic - The method getOptions is a static method (this test will be conducted on one of the three classes which realizes Setting)
