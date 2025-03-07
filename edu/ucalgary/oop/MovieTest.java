@@ -12,40 +12,40 @@ public class MovieTest {
 
     @Before
     public void setUp() {
-        movie = new Movie(expectedTitle, expectedDuration, expectedGenre, 
-           expectedDirector);
+        movie = new Movie(expectedTitle, expectedDuration, expectedGenre,
+                expectedDirector);
     }
 
     @Test
     public void testMovieToString() {
-        String expectedString = 
-          "Inception (Sci-Fi, 148 mins, directed by Christopher Nolan)";
+        String expectedString =
+                "Inception (Sci-Fi, 148 mins, directed by Christopher Nolan)";
         assertEquals("toString() correctly formats movie",
-          expectedString, movie.toString());
+                expectedString, movie.toString());
     }
 
     @Test
     public void testGetDirector() {
         assertEquals("getDirector() returns value set by constructor",
-          expectedDirector, movie.getDirector());
+                expectedDirector, movie.getDirector());
     }
 
     @Test
     public void testGetTitleFromParent() {
         assertEquals("getTitle() returns value set by constructor",
-          expectedTitle, movie.getTitle());
+                expectedTitle, movie.getTitle());
     }
 
     @Test
     public void testGetDurationFromParent() {
         assertEquals("getDuration() returns value set by constructor",
-          expectedDuration, movie.getDuration());
+                expectedDuration, movie.getDuration());
     }
 
     @Test
     public void testGetGenreFromParent() {
         assertEquals("getGenre() returns value set by constructor",
-          expectedGenre, movie.getGenre());
+                expectedGenre, movie.getGenre());
     }
 }
 

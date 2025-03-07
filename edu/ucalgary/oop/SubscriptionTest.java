@@ -21,33 +21,33 @@ public class SubscriptionTest {
         subscription = new Subscription("Basic", 9.99, platform);
     }
 
-    @Test 
+    @Test
     public void testThreeArgumentConstructor() throws Exception {
         var newSubscription = new Subscription("Premium", 6.07, platform);
-        assertEquals("Constructor correctly sets tier", "Premium", 
-           newSubscription.getTier());
-        assertEquals("Constructor correctly sets price", 6.07, 
-           newSubscription.getPrice(), 0.00);
-        assertEquals("Constructor correctly sets platform", platform, 
-           newSubscription.getPlatform());
+        assertEquals("Constructor correctly sets tier", "Premium",
+                newSubscription.getTier());
+        assertEquals("Constructor correctly sets price", 6.07,
+                newSubscription.getPrice(), 0.00);
+        assertEquals("Constructor correctly sets platform", platform,
+                newSubscription.getPlatform());
     }
 
     @Test
     public void testTwoArgumentConstructor() throws Exception {
         var newSubscription = new Subscription(6.54, platform);
-        assertEquals("Constructor correctly sets tier", "Basic", 
-           newSubscription.getTier());
-        assertEquals("Constructor correctly sets price", 6.54, 
-           newSubscription.getPrice(), 0.00);
-        assertEquals("Constructor correctly sets platform", platform, 
-           newSubscription.getPlatform());
+        assertEquals("Constructor correctly sets tier", "Basic",
+                newSubscription.getTier());
+        assertEquals("Constructor correctly sets price", 6.54,
+                newSubscription.getPrice(), 0.00);
+        assertEquals("Constructor correctly sets platform", platform,
+                newSubscription.getPlatform());
     }
 
     @Test
     public void testSetSettingUpdatesSettingValue() throws Exception {
         subscription.setSetting("Language", "Spanish");
         assertEquals("setSetting updates the current value for a category",
-            "Spanish", subscription.getCurrentSetting("Language"));
+                "Spanish", subscription.getCurrentSetting("Language"));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -65,35 +65,35 @@ public class SubscriptionTest {
         subscription.setSetting("Language", "Spanish");
         subscription.removeSetting("Language");
         assertEquals("removeSetting resets the category to its default value",
-            "English", subscription.getCurrentSetting("Language"));
+                "English", subscription.getCurrentSetting("Language"));
     }
 
     @Test
-    public void testPlayContentSucceedsForNonPremiumContentBasicSubscription() {
+    public void testPlayContentSucceedsForNonPremiumContentBasicSubscription() throws Exception{
         String result = subscription.playContent(freeMusic);
         assertEquals("playContent succeeds for non-premium content",
-            "Bohemian Rhapsody (Rock, 6 mins, by Queen)", result);
+                "Bohemian Rhapsody (Rock, 6 mins, by Queen)", result);
     }
 
     @Test
-    public void testPlayContentSucceedsForNonPremiumContentPremiumSubscription() {
+    public void testPlayContentSucceedsForNonPremiumContentPremiumSubscription() throws Exception {
         subscription.setTier("Premium");
         String result = subscription.playContent(freeMusic);
         assertEquals("playContent succeeds for non-premium content",
-            "Bohemian Rhapsody (Rock, 6 mins, by Queen)", result);
+                "Bohemian Rhapsody (Rock, 6 mins, by Queen)", result);
     }
 
     @Test(expected = ContentAccessRestrictedException.class)
-    public void testPlayContentThrowsForPremiumContentWithBasicTier() {
+    public void testPlayContentThrowsForPremiumContentWithBasicTier() throws Exception {
         subscription.playContent(premiumMovie);
     }
 
     @Test
-    public void testPlayContentSucceedsForPremiumContentWithPremiumTier() {
+    public void testPlayContentSucceedsForPremiumContentWithPremiumTier() throws Exception {
         subscription.setTier("Premium");
         String result = subscription.playContent(premiumMovie);
         assertEquals("playContent succeeds for premium content with Premium tier",
-            "Inception (Sci-Fi, 148 mins, directed by Christopher Nolan)", result);
+                "Inception (Sci-Fi, 148 mins, directed by Christopher Nolan)", result);
     }
 
     @Test
@@ -101,23 +101,23 @@ public class SubscriptionTest {
     // if the setting is not set for the subscription.
     public void testDefaultSettingsIfNotSet() throws Exception {
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the subscription", "English", 
-            subscription.getCurrentSetting("Language"));
+                        "was not set for the subscription", "English",
+                subscription.getCurrentSetting("Language"));
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the subscription", "On", 
-            subscription.getCurrentSetting("Captioning"));
+                        "was not set for the subscription", "On",
+                subscription.getCurrentSetting("Captioning"));
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the subscription", "Light", 
-            subscription.getCurrentSetting("Theme"));
+                        "was not set for the subscription", "Light",
+                subscription.getCurrentSetting("Theme"));
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the subscription", "Small", 
-            subscription.getCurrentSetting("Font Size"));
+                        "was not set for the subscription", "Small",
+                subscription.getCurrentSetting("Font Size"));
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the subscription", "On", 
-            subscription.getCurrentSetting("Autoplay"));
+                        "was not set for the subscription", "On",
+                subscription.getCurrentSetting("Autoplay"));
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the subscription", "On", 
-            subscription.getCurrentSetting("Notifications"));
+                        "was not set for the subscription", "On",
+                subscription.getCurrentSetting("Notifications"));
     }
 }
 

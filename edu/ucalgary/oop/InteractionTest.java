@@ -31,7 +31,7 @@ public class InteractionTest {
         assertEquals("Constructor correctly sets the user", user, interaction.getUser());
         assertEquals("Constructor correctly sets the content", movie, interaction.getContent());
         assertTrue("Constructor sets lastAccessed to a time close to creation",
-            isWithinAllowedDifference(beforeCreation, afterCreation, interaction.getLastAccessed()));
+                isWithinAllowedDifference(beforeCreation, afterCreation, interaction.getLastAccessed()));
         assertEquals("Constructor initializes stoppingPoint to 0", 0, interaction.getStoppingPoint());
     }
 
@@ -45,7 +45,7 @@ public class InteractionTest {
 
         // Assert
         assertEquals("setStoppingPoint correctly updates the stopping point",
-            expectedStoppingPoint, interaction.getStoppingPoint());
+                expectedStoppingPoint, interaction.getStoppingPoint());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class InteractionTest {
 
         // Assert
         assertTrue("setLastAccessed updates lastAccessed to a time close to now",
-            isWithinAllowedDifference(beforeUpdate, afterUpdate, interaction.getLastAccessed()));
+                isWithinAllowedDifference(beforeUpdate, afterUpdate, interaction.getLastAccessed()));
     }
 
     // Helper method to check if a time is within the allowed difference

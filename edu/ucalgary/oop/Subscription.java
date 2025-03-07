@@ -6,7 +6,7 @@ public class Subscription {
     private String tier = "Basic";
     private double price;
     private StreamingPlatform platform;
-    private Setting[] settings = new Setting[0]; 
+    private Setting[] settings = new Setting[0];
 
     public Subscription(String tier, double price, StreamingPlatform platform) {
         // Your code here

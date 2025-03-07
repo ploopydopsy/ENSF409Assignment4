@@ -19,21 +19,21 @@ public class LanguageAndAccessibilityConfigurationTest {
     public void testGetCategories() {
         String[] expectedCategories = {"Language", "Captioning"};
         assertArrayEquals("getCategories() returns all valid categories",
-            expectedCategories, config.getCategories());
+                expectedCategories, config.getCategories());
     }
 
     @Test
     public void testGetOptionsForLanguage() {
         String[] expectedOptions = {"English", "Spanish", "French"};
         assertArrayEquals("getOptions() returns valid options for Language",
-            expectedOptions, config.getOptions("Language"));
+                expectedOptions, config.getOptions("Language"));
     }
 
     @Test
     public void testGetOptionsForCaptioning() {
         String[] expectedOptions = {"On", "Off"};
         assertArrayEquals("getOptions() returns valid options for Captioning",
-            expectedOptions, config.getOptions("Captioning"));
+                expectedOptions, config.getOptions("Captioning"));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -45,7 +45,7 @@ public class LanguageAndAccessibilityConfigurationTest {
     public void testGetCurrentCategoryAfterSet() {
         config.setValue("Captioning", "On");
         assertEquals("getCurrentCategory() returns the category last set",
-            "Captioning", config.getCurrentCategory());
+                "Captioning", config.getCurrentCategory());
     }
 
     @Test(expected = IllegalArgumentException.class)

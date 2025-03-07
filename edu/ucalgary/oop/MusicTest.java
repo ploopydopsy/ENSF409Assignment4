@@ -19,31 +19,31 @@ public class MusicTest {
     public void testMusicToString() {
         String expectedString = "Bohemian Rhapsody (Rock, 6 mins, by Queen)";
         assertEquals("toString() correctly formats music details",
-            expectedString, music.toString());
+                expectedString, music.toString());
     }
 
     @Test
     public void testGetArtist() {
         assertEquals("getArtist() returns value set by constructor",
-            expectedArtist, music.getArtist());
+                expectedArtist, music.getArtist());
     }
 
     @Test
     public void testGetTitleFromParent() {
         assertEquals("getTitle() returns value set by constructor",
-            expectedTitle, music.getTitle());
+                expectedTitle, music.getTitle());
     }
 
     @Test
     public void testGetDurationFromParent() {
         assertEquals("getDuration() returns value set by constructor",
-            expectedDuration, music.getDuration());
+                expectedDuration, music.getDuration());
     }
 
     @Test
     public void testGetGenreFromParent() {
         assertEquals("getGenre() returns value set by constructor",
-            expectedGenre, music.getGenre());
+                expectedGenre, music.getGenre());
     }
 }
 

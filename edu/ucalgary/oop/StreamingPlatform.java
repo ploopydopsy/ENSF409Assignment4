@@ -14,7 +14,7 @@ public class StreamingPlatform {
     public String getName() {
         return name;
     }
-  
+
     public Content[] getCatalog() { return catalog; }
 
     // Your code here

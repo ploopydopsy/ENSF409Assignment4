@@ -19,21 +19,21 @@ public class GeneralConfigurationTest {
     public void testGetCategories() {
         String[] expectedCategories = {"Autoplay", "Notifications"};
         assertArrayEquals("getCategories() returns all valid categories",
-            expectedCategories, config.getCategories());
+                expectedCategories, config.getCategories());
     }
 
     @Test
     public void testGetOptionsForAutoplay() {
         String[] expectedOptions = {"On", "Off"};
         assertArrayEquals("getOptions() returns valid options for Autoplay",
-            expectedOptions, config.getOptions("Autoplay"));
+                expectedOptions, config.getOptions("Autoplay"));
     }
 
     @Test
     public void testGetOptionsForNotifications() {
         String[] expectedOptions = {"On", "Off"};
         assertArrayEquals("getOptions() returns valid options for Notifications",
-            expectedOptions, config.getOptions("Notifications"));
+                expectedOptions, config.getOptions("Notifications"));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -45,7 +45,7 @@ public class GeneralConfigurationTest {
     public void testGetCurrentCategoryAfterSet() {
         config.setValue("Notifications", "Off");
         assertEquals("getCurrentCategory() returns the category last set",
-            "Notifications", config.getCurrentCategory());
+                "Notifications", config.getCurrentCategory());
     }
 
     @Test(expected = IllegalArgumentException.class)

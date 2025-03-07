@@ -20,21 +20,21 @@ public class AppearanceConfigurationTest {
     public void testGetCategories() {
         String[] expectedCategories = {"Theme", "Font Size"};
         assertArrayEquals("getCategories() returns all valid categories",
-            expectedCategories, config.getCategories());
+                expectedCategories, config.getCategories());
     }
 
     @Test
     public void testGetOptionsForTheme() {
         String[] expectedOptions = {"Light", "Dark"};
         assertArrayEquals("getOptions() returns valid options for Theme",
-            expectedOptions, config.getOptions("Theme"));
+                expectedOptions, config.getOptions("Theme"));
     }
 
     @Test
     public void testGetOptionsForFontSize() {
         String[] expectedOptions = {"Small", "Medium", "Large"};
         assertArrayEquals("getOptions() returns valid options for Font Size",
-            expectedOptions, config.getOptions("Font Size"));
+                expectedOptions, config.getOptions("Font Size"));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -46,7 +46,7 @@ public class AppearanceConfigurationTest {
     public void testGetCurrentCategoryAfterSet() {
         config.setValue("Font Size", "Medium");
         assertEquals("getCurrentCategory() returns the category last set",
-            "Font Size", config.getCurrentCategory());
+                "Font Size", config.getCurrentCategory());
     }
 
     @Test(expected = IllegalArgumentException.class)

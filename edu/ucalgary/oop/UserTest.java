@@ -34,24 +34,24 @@ public class UserTest {
     // if the setting is not set for the user.
     public void testDefaultSettingsIfNotSet() throws Exception {
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the user", "English", user.getCurrentSetting("Language"));
+                "was not set for the user", "English", user.getCurrentSetting("Language"));
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the user", "On", user.getCurrentSetting("Captioning"));
+                "was not set for the user", "On", user.getCurrentSetting("Captioning"));
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the user", "Light", user.getCurrentSetting("Theme"));
+                "was not set for the user", "Light", user.getCurrentSetting("Theme"));
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the user", "Small", user.getCurrentSetting("Font Size"));
+                "was not set for the user", "Small", user.getCurrentSetting("Font Size"));
         assertEquals("getCurrentSettings should return the default if setting " +
-            "was not set for the user", "On", user.getCurrentSetting("Autoplay"));
-        assertEquals("getCurrentSettings should return the default if setting " + 
-            "was not set for the user", "On", user.getCurrentSetting("Notifications"));
+                "was not set for the user", "On", user.getCurrentSetting("Autoplay"));
+        assertEquals("getCurrentSettings should return the default if setting " +
+                "was not set for the user", "On", user.getCurrentSetting("Notifications"));
     }
 
 
     @Test
     public void testOneArgumentConstructor() throws Exception {
         assertEquals("Constructor initializes the username correctly",
-            "test_user", user.getUsername());
+                "test_user", user.getUsername());
     }
 
     @Test
@@ -66,9 +66,9 @@ public class UserTest {
         User user = new User(expectedUsername, subscriptions);
 
         assertEquals("Constructor initializes the username correctly",
-            expectedUsername, user.getUsername());
+                expectedUsername, user.getUsername());
         assertArrayEquals("Constructor initializes the subscriptions correctly",
-            subscriptions, user.getSubscriptions());
+                subscriptions, user.getSubscriptions());
     }
 
     @Test
@@ -79,23 +79,23 @@ public class UserTest {
         User newUser = new User(expectedUsername, providedCategory, providedValue);
 
         assertEquals("Constructor initializes the username correctly",
-            expectedUsername, newUser.getUsername());
+                expectedUsername, newUser.getUsername());
         assertEquals("Provided language setting overrides default",
-            providedValue, newUser.getCurrentSetting(providedCategory));
+                providedValue, newUser.getCurrentSetting(providedCategory));
     }
 
     @Test
     public void testSetUsername() {
         user.setUsername("new_user");
         assertEquals("setUsername updates the username correctly",
-            "new_user", user.getUsername());
+                "new_user", user.getUsername());
     }
 
     @Test
     public void testSetSettingUpdatesValue() throws Exception {
         user.setSetting("Language", "Spanish");
         assertEquals("setSetting updates the value of a category",
-            "Spanish", user.getCurrentSetting("Language"));
+                "Spanish", user.getCurrentSetting("Language"));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -113,16 +113,16 @@ public class UserTest {
         user.setSetting("Language", "Spanish");
         user.removeSetting("Language");
         assertEquals("removeSetting resets the category to its default value",
-            "English", user.getCurrentSetting("Language"));
+                "English", user.getCurrentSetting("Language"));
     }
 
     @Test
     public void testAddSubscription() {
         user.addSubscription(subscription1);
         assertEquals("addSubscription adds a subscription to the user",
-            1, user.getSubscriptions().length);
+                1, user.getSubscriptions().length);
         assertEquals("The added subscription is correct",
-            subscription1, user.getSubscriptions()[0]);
+                subscription1, user.getSubscriptions()[0]);
     }
 
     @Test
@@ -131,9 +131,9 @@ public class UserTest {
         user.addSubscription(subscription2);
         user.removeSubscription(subscription1);
         assertEquals("removeSubscription removes the specified subscription",
-            1, user.getSubscriptions().length);
+                1, user.getSubscriptions().length);
         assertEquals("The remaining subscription is correct",
-            subscription2, user.getSubscriptions()[0]);
+                subscription2, user.getSubscriptions()[0]);
     }
 
     @Test
@@ -142,23 +142,23 @@ public class UserTest {
         user.addSubscription(subscription2);
         user.clearSubscriptions();
         assertEquals("clearSubscriptions removes all subscriptions",
-            0, user.getSubscriptions().length);
+                0, user.getSubscriptions().length);
     }
 
     @Test
-    public void testPlayContentAvailable() {
+    public void testPlayContentAvailable() throws Exception {
         user.addSubscription(subscription2); // Premium subscription
         String result = user.playContent(freeMusic);
         assertEquals("playContent plays available content",
-            "Bohemian Rhapsody (Rock, 6 mins, by Queen)", result);
+                "Bohemian Rhapsody (Rock, 6 mins, by Queen)", result);
     }
 
     @Test
-    public void testPlayContentContentUnavailable() {
+    public void testPlayContentContentUnavailable() throws Exception {
         user.addSubscription(subscription1); // Basic subscription
         String result = user.playContent(premiumMovie);
         assertEquals("playContent returns generic unavailable message to user",
-            "This content is not available.", result);
+                "This content is not available.", result);
     }
 }
 

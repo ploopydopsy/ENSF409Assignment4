@@ -5,11 +5,11 @@ import java.util.Arrays;
 
 class GeneralConfiguration implements Setting {
     private static final String[][] CATEGORIES = {
-        // Argument [0] is the category, argument [1] is the default setting
-        // For example, the category "Autoplay" has a default setting of "On"
-        // and the other available setting is "Off"
-        {"Autoplay", "On", "Off"},
-        {"Notifications", "On", "Off"}
+            // Argument [0] is the category, argument [1] is the default setting
+            // For example, the category "Autoplay" has a default setting of "On"
+            // and the other available setting is "Off"
+            {"Autoplay", "On", "Off"},
+            {"Notifications", "On", "Off"}
     };
     private String currentCategory;
     private String currentValue;
