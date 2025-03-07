@@ -30,19 +30,19 @@ You have been provided with a UML diagram and some unit tests. Implement the pro
 * LanguageAndAccessibilityConfiguration - A class used for a setting about language and captioning. Each instance of the class represents a specific setting. The class also contains static information about all available settings.
 * AppearanceConfiguration - A class used for a setting about appearance, such as menu in dark mode or light mode. Each instance of the class represents a specific setting. The class also contains static information about all available settings.
 * GeneralConfiguration - A class used for general settings, such as autoplay. Each instance of the class represents a specific setting. The class also contains static information about all available settings.
-* ContentAccessRestrictionException - An exception thrown if the user cannot access content, for instance if it is not available in their region
+* ContentAccessRestrictedException - An exception thrown if the user cannot access content, for instance if it is not available in their region
 * Content - A class describing common information about content
-* Movie - Each instance of the class represents a movie 
-* Music - Each instance of the class represents a song 
+* Movie - Each instance of the class represents a movie
+* Music - Each instance of the class represents a song
 * Interaction - Stores information about a user's interaction with Content, such as when it was last accessed
 
-The program will be assessed through automated testing (described in lesson Testing Part I). Different values will be used for testing than the ones provided in the example tests. 
+The program will be assessed through automated testing (described in lesson Testing Part I). Different values will be used for testing than the ones provided in the example tests.
 
 Warning: You may receive a 0 if your submission does not follow the submission requirements. Your code must compile and run on the command line, be part of the edu.ucalgary.oop package, and be submitted in a zip file exactly as described in the general submission instructions.
 
 Submit only (and all of) the files:
          * AppearanceConfiguration.java
-         * ContentAccessRestrictionException.java
+         * ContentAccessRestrictedException.java
          * Content.java
          * GeneralConfiguration.java
          * Interaction.java
