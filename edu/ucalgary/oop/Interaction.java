@@ -31,5 +31,12 @@ class Interaction {
     public LocalDateTime getLastAccessed() {
         return lastAccessed;
     }
+
+    public Interaction(User user, Content content) {
+        this.USER = user;
+        this.CONTENT = content;
+        setLastAccessed();
+    }
+
 }
 
