@@ -1,32 +1,35 @@
 package edu.ucalgary.oop;
 
-import java.util.Arrays;
-
-
-class GeneralConfiguration implements Setting {
-    private static final String[][] CATEGORIES = {
-            // Argument [0] is the category, argument [1] is the default setting
-            // For example, the category "Autoplay" has a default setting of "On"
-            // and the other available setting is "Off"
-            {"Autoplay", "On", "Off"},
-            {"Notifications", "On", "Off"}
+public class LanguageAndAccessibilityConfiguration implements Setting{
+    private final String[][] CATEGORIES = {
+            {"Language", "English", "Spanish", "French"},
+            {"Captioning", "On", "Off"}
     };
     private String currentCategory;
     private String currentValue;
 
-    public GeneralConfiguration (String category, String value) throws Exception{
-        setValue(category, value);
+    // constuctor
+    public LanguageAndAccessibilityConfiguration(String currentCategory, String currentValue) {
+        setValue(currentCategory, currentValue);
     }
 
-    public static String[] getCategories() {
+    // getters
+    public String[] getCategory() {
         String[] categories = new String[CATEGORIES.length];
         for (int i = 0; i < CATEGORIES.length; i++) {
             categories[i] = CATEGORIES[i][0];
         }
         return categories;
     }
+    public String getCurrentValue() {
+        return currentValue;
+    }
 
-    public static String[] getOptions(String category) {
+    public String getCurrentCategory() {
+        return currentCategory;
+    }
+
+    public String[] getOptions(String category) {
         for (int i = 0; i < CATEGORIES.length; i++) {
             if (CATEGORIES[i][0].equals(category)) {
                 String[] options = new String[CATEGORIES[i].length - 1];
@@ -38,16 +41,11 @@ class GeneralConfiguration implements Setting {
         }
         throw new IllegalArgumentException("Invalid category");
     }
-
-    public String getCurrentCategory() {
-        return currentCategory;
+    public String[][] getCategories() {
+        return CATEGORIES;
     }
 
-    public String getCurrentValue() {
-        return currentValue;
-    }
-
-    public void setValue(String category, String option) {
+    public void setValue(String category, String value) {
         String[] options = getOptions(category);
         boolean isValid = false;
         for (int i = 0; i < options.length; i++) {
@@ -62,6 +60,7 @@ class GeneralConfiguration implements Setting {
         this.currentCategory = category;
         this.currentValue = value;
     }
+
+
+
 }
-
-

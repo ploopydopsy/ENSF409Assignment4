@@ -8,8 +8,11 @@ public class Subscription {
     private StreamingPlatform platform;
     private Setting[] settings = new Setting[0];
 
+    // constructors
     public Subscription(String tier, double price, StreamingPlatform platform) {
-        // Your code here
+        this.tier = tier;
+        this.price = price;
+        this.platform = platform;
     }
 
     public Subscription(double price, StreamingPlatform platform) {
@@ -17,6 +20,7 @@ public class Subscription {
         this.platform = platform;
     }
 
+    // getters
     public String getTier() {
         return this.tier;
     }
@@ -33,6 +37,11 @@ public class Subscription {
         return Arrays.copyOf(settings, settings.length);
     }
 
+    public String getCurrentSetting(String category) throws Exception {
+        // Your code here
+    }
+
+    // setters
     public void setTier(String tier) {
         this.tier = tier;
     }
@@ -45,13 +54,10 @@ public class Subscription {
         this.platform = platform;
     }
 
-    public String getCurrentSetting(String category) throws Exception {
-        // Your code here
-    }
-
     public void setSetting(String category, String value) throws Exception {
         // Your code here
     }
+
 
     public void removeSetting(String category) {
         // Your code here

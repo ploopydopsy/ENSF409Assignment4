@@ -2,18 +2,15 @@ package edu.ucalgary.oop;
 
 import java.time.LocalDateTime;
 class Interaction {
+    // data members
     private final User USER;
     private final Content CONTENT;
     private LocalDateTime lastAccessed;
     private int stoppingPoint;
 
-    public Interaction(User user, Content content) {
-        this.USER = user;
-        this.CONTENT = content;
-        setLastAccessed();
-    }
-
+    // getters and setters
     public User getUser() { return this.USER; }
+
     public Content getContent() { return this.CONTENT; }
 
     public void setStoppingPoint(int stoppingPoint) {

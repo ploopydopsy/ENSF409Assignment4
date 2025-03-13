@@ -10,14 +10,12 @@ public class InteractionTest {
     private User user;
     private Movie movie;
     private Interaction interaction;
-
     @Before
     public void setUp() {
         user = new User("test_user");
         movie = new Movie("Inception", 148, "Sci-Fi", "Christopher Nolan");
         interaction = new Interaction(user, movie);
     }
-
     @Test
     public void testConstructorInitializesFields() {
         // Arrange
