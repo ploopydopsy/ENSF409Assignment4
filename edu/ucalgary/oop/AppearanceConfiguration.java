@@ -2,20 +2,18 @@ package edu.ucalgary.oop;
 
 public class AppearanceConfiguration implements Setting {
     // data members
-    private final String[][] CATEGORIES = {
+    private static final String[][] CATEGORIES = {
             {"Theme", "Light", "Dark"},
             {"Font Size", "Small", "Medium", "Large"}
     };
     private String currentCategory;
     private String currentValue;
 
-    // constructor
-    public AppearanceConfiguration(String category, String value) {
+    public AppearanceConfiguration(String category, String value) throws IllegalArgumentException {
         setValue(category, value);
     }
 
-    // setters and getters
-    public String[] getCategories() {
+    public static String[] getCategories() {
         String[] categories = new String[CATEGORIES.length];
         for (int i = 0; i < CATEGORIES.length; i++) {
             categories[i] = CATEGORIES[i][0];
@@ -27,7 +25,7 @@ public class AppearanceConfiguration implements Setting {
         return currentValue;
     }
 
-    public String[] getOptions(String category) {
+    public static String[] getOptions(String category) throws IllegalArgumentException {
         for (int i = 0; i < CATEGORIES.length; i++) {
             if (CATEGORIES[i][0].equals(category)) {
                 String[] options = new String[CATEGORIES[i].length - 1];
@@ -40,20 +38,16 @@ public class AppearanceConfiguration implements Setting {
         throw new IllegalArgumentException("Invalid category");
     }
 
-    public void setValue(String category, String value) {
+    public void setValue(String category, String value) throws IllegalArgumentException {
         String[] options = getOptions(category);
-        boolean isValid = false;
-        for (int i = 0; i < options.length; i++) {
-            if (options[i].equals(value)) {
-                isValid = true;
-                break;
+        for (String option : options) {
+            if (option.equals(value)) {
+                this.currentCategory = category;
+                this.currentValue = value;
+                return;
             }
         }
-        if (!isValid) {
-            throw new IllegalArgumentException("Invalid value");
-        }
-        this.currentCategory = category;
-        this.currentValue = value;
+        throw new IllegalArgumentException("Invalid value");
     }
 
     public String getCurrentCategory() {

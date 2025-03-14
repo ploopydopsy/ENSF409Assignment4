@@ -43,7 +43,7 @@ Warning: You may receive a 0 if your submission does not follow the submission r
 Submit only (and all of) the files:
          * AppearanceConfiguration.java
          * ContentAccessRestrictedException.java
-         - Content.java
+         * Content.java
          * GeneralConfiguration.java
          * Interaction.java
          * LanguageAndAccessibilityConfiguration.java

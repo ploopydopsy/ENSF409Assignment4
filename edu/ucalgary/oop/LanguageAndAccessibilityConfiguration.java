@@ -1,35 +1,30 @@
 package edu.ucalgary.oop;
 
-public class LanguageAndAccessibilityConfiguration implements Setting{
-    private final String[][] CATEGORIES = {
+public class LanguageAndAccessibilityConfiguration implements Setting {
+    private static final String[][] CATEGORIES = {
             {"Language", "English", "Spanish", "French"},
             {"Captioning", "On", "Off"}
     };
     private String currentCategory;
     private String currentValue;
 
-    // constuctor
-    public LanguageAndAccessibilityConfiguration(String currentCategory, String currentValue) {
-        setValue(currentCategory, currentValue);
+    public LanguageAndAccessibilityConfiguration(String category, String value) throws IllegalArgumentException {
+        setValue(category, value);
     }
 
-    // getters
-    public String[] getCategory() {
+    public static String[] getCategories() {
         String[] categories = new String[CATEGORIES.length];
         for (int i = 0; i < CATEGORIES.length; i++) {
             categories[i] = CATEGORIES[i][0];
         }
         return categories;
     }
+
     public String getCurrentValue() {
         return currentValue;
     }
 
-    public String getCurrentCategory() {
-        return currentCategory;
-    }
-
-    public String[] getOptions(String category) {
+    public static String[] getOptions(String category) throws IllegalArgumentException {
         for (int i = 0; i < CATEGORIES.length; i++) {
             if (CATEGORIES[i][0].equals(category)) {
                 String[] options = new String[CATEGORIES[i].length - 1];
@@ -41,26 +36,21 @@ public class LanguageAndAccessibilityConfiguration implements Setting{
         }
         throw new IllegalArgumentException("Invalid category");
     }
-    public String[][] getCategories() {
-        return CATEGORIES;
-    }
 
-    public void setValue(String category, String value) {
+    public void setValue(String category, String value) throws IllegalArgumentException {
         String[] options = getOptions(category);
-        boolean isValid = false;
-        for (int i = 0; i < options.length; i++) {
-            if (options[i].equals(value)) {
-                isValid = true;
-                break;
+        for (String option : options) {
+            if (option.equals(value)) {
+                this.currentCategory = category;
+                this.currentValue = value;
+                return;
             }
         }
-        if (!isValid) {
-            throw new IllegalArgumentException("Invalid value");
-        }
-        this.currentCategory = category;
-        this.currentValue = value;
+        throw new IllegalArgumentException("Invalid value");
     }
 
-
-
+    public String getCurrentCategory() {
+        return currentCategory;
+    }
 }
+

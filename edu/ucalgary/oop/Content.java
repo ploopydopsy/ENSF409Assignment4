@@ -1,7 +1,6 @@
 package edu.ucalgary.oop;
 
 public class Content {
-    // data members
     private String title;
     private int duration;
     private String genre;
@@ -12,16 +11,16 @@ public class Content {
         this.genre = genre;
     }
 
-    public String getGenre(){
-        return this.genre;
+    public String getTitle() {
+        return this.title;
     }
 
-    public int getDuration(){
+    public int getDuration() {
         return this.duration;
     }
 
-    public String getTitle(){
-        return this.title;
+    public String getGenre() {
+        return this.genre;
     }
 
     @Override

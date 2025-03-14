@@ -16,5 +16,4 @@ public class Movie extends Content {
     public String toString() {
         return getTitle() + " (" + getGenre() + ", " + getDuration() + " mins, directed by " + director + ")";
     }
-
 }

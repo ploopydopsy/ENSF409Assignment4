@@ -1,20 +1,18 @@
 package edu.ucalgary.oop;
 
-import java.util.Arrays;
-
 public class User {
+    // data members
     private String username;
-    private Subscription[] subscriptions = new Subscription[0];
     private Setting[] settings = new Setting[0];
+    private Subscription[] subscriptions = new Subscription[0];
 
-    // Constructors
-    public User(String username){
+    public User(String username) {
         this.username = username;
-        this.subscriptions = new Subscription[0];
     }
-    public User (String username, String category, String value) {
+
+    public User(String username, String category, String value) {
         this.username = username;
-        this.subscriptions = new Subscription[0];
+        setSetting(category, value);
     }
 
     public User(String username, Subscription[] subscriptions) {
@@ -22,75 +20,138 @@ public class User {
         this.subscriptions = subscriptions;
     }
 
-    // getters
-
     public Setting[] getSettings() {
         return settings;
     }
 
-    public String getCurrentSetting(String category) {
-
+    public String getCurrentSetting(String category) throws IllegalArgumentException {
+        for (int i = 0; i < settings.length; i++) {
+            if (settings[i].getCurrentCategory().equals(category)) {
+                return settings[i].getCurrentValue();
+            }
+        }
+        try {
+            return GeneralConfiguration.getOptions(category)[0];
+        } catch (IllegalArgumentException e1) {
+            try {
+                return AppearanceConfiguration.getOptions(category)[0];
+            } catch (IllegalArgumentException e2) {
+                return LanguageAndAccessibilityConfiguration.getOptions(category)[0];
+            }
+        }
     }
 
-    public Subscription[] getSubscriptions() {
-        return subscriptions;
+    public void setSetting(String category, String value) throws IllegalArgumentException {
+        for (int i = 0; i < settings.length; i++) {
+            if (settings[i].getCurrentCategory().equals(category)) {
+                settings[i].setValue(category, value);
+                return;
+            }
+        }
+
+        Setting newSetting;
+        try {
+            newSetting = new LanguageAndAccessibilityConfiguration(category, value);
+        } catch (Exception e1) {
+            try {
+                newSetting = new AppearanceConfiguration(category, value);
+            } catch (Exception e2) {
+                newSetting = new GeneralConfiguration(category, value);
+            }
+        }
+
+        Setting[] newSettings = new Setting[settings.length + 1];
+        for (int i = 0; i < settings.length; i++) {
+            newSettings[i] = settings[i];
+        }
+        newSettings[newSettings.length - 1] = newSetting;
+        settings = newSettings;
     }
 
     public String getUsername() {
         return username;
     }
 
-    private String getDefaultValueForCategory(String category) throws Exception {
-        String[][] allCategories = new String[][] {
-                LanguageAndAccessibilityConfiguration.getCategories(),
-                AppearanceConfiguration.getCategories(),
-                GeneralConfiguration.getCategories()
-        };
-
-        for (String[] categories : allCategories) {
-            for (String cat : categories) {
-                if (cat.equals(category)) {
-                    return getDefaultOption(category);
-                }
-            }
-        }
-        return null;
-    }
-
-    // setters
-
-    public void setSettings(Setting[] settings) {
-        this.settings = settings;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
-    // subscription functions
-
     public void addSubscription(Subscription subscription) {
-        subscriptions = Arrays.copyOf(subscriptions, subscriptions.length + 1);
+        Subscription[] newSubscriptions = new Subscription[subscriptions.length + 1];
+        System.arraycopy(subscriptions, 0, newSubscriptions, 0, subscriptions.length);
+        newSubscriptions[newSubscriptions.length - 1] = subscription;
+        subscriptions = newSubscriptions;
     }
 
     public void removeSubscription(Subscription subscription) {
-        subscriptions = Arrays.copyOf(subscriptions, subscriptions.length - 1);
+        int count = 0;
+        for (int i = 0; i < subscriptions.length; i++) {
+            if (subscriptions[i] != subscription) {
+                count++;
+            }
+        }
+
+        Subscription[] newSubscriptions = new Subscription[count];
+        int index = 0;
+        for (int i = 0; i < subscriptions.length; i++) {
+            if (subscriptions[i] != subscription) {
+                newSubscriptions[index] = subscriptions[i];
+                index++;
+            }
+        }
+        subscriptions = newSubscriptions;
     }
 
     public void clearSubscriptions() {
         subscriptions = new Subscription[0];
     }
 
-
-
-    //misc
-    public String playContent (Content media) {
-        //TODO: FIX ME
+    public Subscription[] getSubscriptions() {
+        return subscriptions;
     }
 
+    public String playContent(Content media) {
+        for (Subscription subscription : subscriptions) {
+            try {
+                return subscription.playContent(media);
+            } catch (ContentAccessRestrictedException e) {
+                continue;
+            }
+        }
+        return "This content is not available.";
+    }
 
     public void removeSetting(String category) {
+        int index = -1;
+        for (int i = 0; i < settings.length; i++) {
+            if (settings[i].getCurrentCategory().equals(category)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            return;
+        }
 
+        Setting[] newSettings = new Setting[settings.length - 1];
+        int j = 0;
+        for (int i = 0; i < settings.length; i++) {
+            if (i != index) {
+                newSettings[j] = settings[i];
+                j++;
+            }
+        }
+        settings = newSettings;
+
+        try {
+            setSetting(category, GeneralConfiguration.getOptions(category)[0]);
+        } catch (IllegalArgumentException e1) {
+            try {
+                setSetting(category, AppearanceConfiguration.getOptions(category)[0]);
+            } catch (IllegalArgumentException e2) {
+                setSetting(category, LanguageAndAccessibilityConfiguration.getOptions(category)[0]);
+            }
+        }
     }
 
 }

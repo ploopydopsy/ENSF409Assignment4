@@ -1,9 +1,6 @@
 package edu.ucalgary.oop;
 
-import java.util.Arrays;
-
-
-class GeneralConfiguration implements Setting {
+public class GeneralConfiguration implements Setting {
     private static final String[][] CATEGORIES = {
             // Argument [0] is the category, argument [1] is the default setting
             // For example, the category "Autoplay" has a default setting of "On"
@@ -14,7 +11,7 @@ class GeneralConfiguration implements Setting {
     private String currentCategory;
     private String currentValue;
 
-    public GeneralConfiguration (String category, String value) throws Exception{
+    public GeneralConfiguration(String category, String value) throws IllegalArgumentException {
         setValue(category, value);
     }
 
@@ -26,7 +23,11 @@ class GeneralConfiguration implements Setting {
         return categories;
     }
 
-    public static String[] getOptions(String category) {
+    public String getCurrentValue() {
+        return currentValue;
+    }
+
+    public static String[] getOptions(String category) throws IllegalArgumentException {
         for (int i = 0; i < CATEGORIES.length; i++) {
             if (CATEGORIES[i][0].equals(category)) {
                 String[] options = new String[CATEGORIES[i].length - 1];
@@ -39,29 +40,20 @@ class GeneralConfiguration implements Setting {
         throw new IllegalArgumentException("Invalid category");
     }
 
+    public void setValue(String category, String value) throws IllegalArgumentException {
+        String[] options = getOptions(category);
+        for (String option : options) {
+            if (option.equals(value)) {
+                this.currentCategory = category;
+                this.currentValue = value;
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Invalid value");
+    }
+
     public String getCurrentCategory() {
         return currentCategory;
     }
 
-    public String getCurrentValue() {
-        return currentValue;
-    }
-
-    public void setValue(String category, String option) {
-        String[] options = getOptions(category);
-        boolean isValid = false;
-        for (int i = 0; i < options.length; i++) {
-            if (options[i].equals(value)) {
-                isValid = true;
-                break;
-            }
-        }
-        if (!isValid) {
-            throw new IllegalArgumentException("Invalid value");
-        }
-        this.currentCategory = category;
-        this.currentValue = value;
-    }
 }
-
-
